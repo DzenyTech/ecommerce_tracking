@@ -1,0 +1,109 @@
+
+### TEST 1 - GET sve narudzbe
+GET http://localhost:8080/api/orders
+
+### TEST 2 - GET po id-u
+GET http://localhost:8080/api/orders/1
+
+### TEST 3 - pravljenje nove narudzbe
+POST http://localhost:8080/api/orders
+Content-Type: application/json
+
+{
+  "customerId": 1,
+  "shippingName": "Hamo Hamic",
+  "shippingStreet": "Marsala Tita 10",
+  "shippingCity": "Zenica",
+  "shippingPostalCode": "72000",
+  "shippingCountry": "Bosnia and Herzegovina",
+  "items": [
+    {
+      "productId": 1,
+      "quantity": 1
+    },
+    {
+      "productId": 2,
+      "quantity": 2
+    }
+  ]
+}
+
+### TEST 4 - nepostojeci kupac
+POST http://localhost:8080/api/orders
+Content-Type: application/json
+
+{
+  "customerId": 9999,
+  "shippingName": "Test Customer",
+  "shippingStreet": "Test Street 1",
+  "shippingCity": "Zenica",
+  "shippingPostalCode": "72000",
+  "shippingCountry": "Bosnia and Herzegovina",
+  "items": [
+    {
+      "productId": 1,
+      "quantity": 1
+    }
+  ]
+}
+
+### TEST 5 - neispravna kolicina (0)
+POST http://localhost:8080/api/orders
+Content-Type: application/json
+
+{
+  "customerId": 1,
+  "shippingName": "Hamo Hamic",
+  "shippingStreet": "Marsala Tita 10",
+  "shippingCity": "Zenica",
+  "shippingPostalCode": "72000",
+  "shippingCountry": "Bosnia and Herzegovina",
+  "items": [
+    {
+      "productId": 1,
+      "quantity": 0
+    }
+  ]
+}
+
+### TEST 6 - nepostojeci proizvodi
+POST http://localhost:8080/api/orders
+Content-Type: application/json
+
+{
+  "customerId": 1,
+  "shippingName": "Hamo Hamic",
+  "shippingStreet": "Marsala Tita 10",
+  "shippingCity": "Zenica",
+  "shippingPostalCode": "72000",
+  "shippingCountry": "Bosnia and Herzegovina",
+  "items": [
+    {
+      "productId": 9999,
+      "quantity": 1
+    }
+  ]
+}
+
+### TEST 7 - duplikat proizvodi
+POST http://localhost:8080/api/orders
+Content-Type: application/json
+
+{
+  "customerId": 1,
+  "shippingName": "Hamo Hamic",
+  "shippingStreet": "Marsala Tita 10",
+  "shippingCity": "Zenica",
+  "shippingPostalCode": "72000",
+  "shippingCountry": "Bosnia and Herzegovina",
+  "items": [
+    {
+      "productId": 1,
+      "quantity": 1
+    },
+    {
+      "productId": 1,
+      "quantity": 2
+    }
+  ]
+}
